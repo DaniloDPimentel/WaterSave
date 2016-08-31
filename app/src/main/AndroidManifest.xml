@@ -21,4 +21,5 @@
         <activity android:name=".TipsActivity"></activity>
     </application>
 
+
 </manifest>

@@ -1,10 +1,10 @@
 package com.example.les.watersave;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -15,8 +15,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
 import com.github.lzyzsd.circleprogress.CircleProgress;
 
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class MainActivity extends AppCompatActivity
@@ -25,12 +31,39 @@ public class MainActivity extends AppCompatActivity
     @SuppressLint("SdCardPath")
     private CircleProgress circleProgress;
 
+    private EditText volumeCaixa;
+    private Button salvarVolumeCaixa;
+    private Timer timerAtual = new Timer();
+    private TimerTask task;
+    private final Handler handler = new Handler();
+
+    public MainActivity() {
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        volumeCaixa = (EditText) findViewById(R.id.editText);
+        salvarVolumeCaixa = (Button) findViewById(R.id.button);
+
+        salvarVolumeCaixa.setOnClickListener(new Button.OnClickListener() {
+                                                 public void onClick(View v) {
+
+                                                     Context contexto = getApplicationContext();
+                                                     String texto = "Caixa salva com: " + volumeCaixa.getText() + " L";
+                                                     int duracao = Toast.LENGTH_SHORT;
+
+                                                     Toast toast = Toast.makeText(contexto, texto, duracao);
+                                                     toast.show();
+
+                                                 }
+                                             }
+        );
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -40,12 +73,27 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
         circleProgress = (CircleProgress) findViewById(R.id.circle_progress);
-        circleProgress.setProgress(85);
+
+        ativaTimer();
     }
 
-    @Override
+    int i = 4;
+    private void ativaTimer(){
+        task = new TimerTask() {
+            public void run() {
+                handler.post(new Runnable() {
+                    public void run() {
+                        i++;
+                        circleProgress.setProgress(i);
+                    }
+                });
+            }};
+
+        timerAtual.schedule(task, 300, 300);
+    }
+
+        @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
