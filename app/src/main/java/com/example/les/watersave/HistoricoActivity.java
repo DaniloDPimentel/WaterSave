@@ -1,6 +1,7 @@
 package com.example.les.watersave;
 
 import android.app.DatePickerDialog;
+import android.graphics.Paint;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -8,8 +9,10 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
 
+import com.db.chart.model.Bar;
 import com.db.chart.model.BarSet;
 import com.db.chart.view.BarChartView;
+import com.db.chart.view.ChartView;
 import com.example.les.watersave.models.Medicao;
 import com.example.les.watersave.models.Mock;
 
@@ -20,6 +23,7 @@ import java.util.List;
 
 public class HistoricoActivity extends AppCompatActivity {
     private static final int dialogIdStart = 0, dialogIdEnd = 1;
+    private static final int DIVISOES_Y = 10;
 
     private BarChartView historico;
     private int diaInicial, mesInicial, anoInicial;
@@ -30,6 +34,7 @@ public class HistoricoActivity extends AppCompatActivity {
     private BarSet barrasHistorico;
     private List<Medicao> dados;
     private int volumeCaixa;
+    private float maxConsumo;
 
 
     private DateFormat formataData = DateFormat.getDateInstance();
@@ -42,7 +47,6 @@ public class HistoricoActivity extends AppCompatActivity {
         historico = (BarChartView) findViewById(R.id.graph_historico);
         tvDataInicio = (TextView) findViewById(R.id.tv_data_inicio);
         tvDataFim = (TextView) findViewById(R.id.tv_data_fim);
-        barrasHistorico = new BarSet();
         Calendar cal = Calendar.getInstance();
         diaFinal = cal.get(Calendar.DAY_OF_MONTH);
         diaInicial = cal.get(Calendar.DAY_OF_MONTH);
@@ -53,10 +57,23 @@ public class HistoricoActivity extends AppCompatActivity {
         dataInicial = Calendar.getInstance();
         dataFinal = Calendar.getInstance();
         showDateDialogOnClick();
-
         carregarDados();
-        gerarBarras();
+        atualizaTextView();
+    }
 
+    private void setarGrafico(){
+        Paint paint = new Paint();
+        historico.reset();
+
+        if(maxConsumo == 0) maxConsumo = 1;
+
+        int interval = (int) Math.ceil(maxConsumo / DIVISOES_Y);
+        int maxInterval = interval * DIVISOES_Y;
+
+        historico.setAxisBorderValues(0, maxInterval, interval);
+        historico.setGrid(ChartView.GridType.HORIZONTAL, DIVISOES_Y, 1, paint);
+        historico.addData(barrasHistorico);
+        historico.show();
     }
 
     private void carregarDados(){
@@ -65,38 +82,65 @@ public class HistoricoActivity extends AppCompatActivity {
     }
 
     private void gerarBarras(){
+        barrasHistorico = new BarSet();
         float consumo = 0, consumoDiario = 0;
+        maxConsumo = 0;
         for(int i = 0; i < dados.size()-1; i++){
-            if(formataData.format(dados.get(i).getData()).compareTo(
-                    formataData.format(dataInicial)) < 0){
+            if(dados.get(i).getData().compareTo(dataInicial.getTime()) < 0){
                 continue;
             }
-            if(formataData.format(dados.get(i).getData()).compareTo(
-                    formataData.format(dataFinal)) > 0){
-                break;
+            if(dados.get(i).getData().compareTo(dataFinal.getTime()) > 0){
+                continue;
             }
 
             if(formataData.format(dados.get(i).getData()).compareTo(
                     formataData.format(dados.get(i+1).getData())) == 0){
                 consumo = dados.get(i+1).getNivel() - dados.get(i).getNivel();
                 if(consumo >= 0){
-                    consumo = consumo*volumeCaixa;
+                    consumo = consumo*volumeCaixa/100f;
                     consumoDiario += consumo;
                 }
             }
             else{
-
+                if(consumoDiario > maxConsumo) maxConsumo = consumoDiario;
+                Bar b = new Bar(formataData.format(dados.get(i).getData()),consumoDiario);
+                b.setColor(52479);
+                barrasHistorico.addBar(b);
+                consumoDiario = 0;
             }
         }
     }
 
 
     private void atualizaTextView(){
-        tvDataInicio.setText(""+diaInicial+"/"+(mesInicial+1)+"/"+anoInicial);
-        tvDataFim.setText(""+diaFinal+"/"+(mesFinal+1)+"/"+anoFinal);
+        String zero1 = "0",zero2 = "0";
+        if(diaInicial >= 10){
+            zero1 = "";
+        }
+        if(mesInicial >= 10){
+            zero2 = "";
+        }
+        tvDataInicio.setText(zero1+diaInicial+"/"+zero2+(mesInicial+1)+"/"+anoInicial);
 
-        dataInicial.set(anoInicial,mesInicial,diaInicial);
-        dataFinal.set(anoFinal,mesFinal,diaFinal);
+        zero1 = "0"; zero2 = "0";
+        if(diaFinal >= 10){
+            zero1 = "";
+        }
+        if(mesFinal >= 10){
+            zero2 = "";
+        }
+        tvDataFim.setText(zero1+diaFinal+"/"+zero2+(mesFinal+1)+"/"+anoFinal);
+
+        dataInicial.set(Calendar.YEAR,anoInicial);
+        dataInicial.set(Calendar.MONTH,mesInicial);
+        dataInicial.set(Calendar.DAY_OF_MONTH,diaInicial);
+        dataFinal.set(Calendar.YEAR,anoFinal);
+        dataFinal.set(Calendar.MONTH,mesFinal);
+        dataFinal.set(Calendar.DAY_OF_MONTH,diaFinal);
+
+        carregarDados();
+        gerarBarras();
+        setarGrafico();
     }
 
     private void showDateDialogOnClick(){
@@ -106,16 +150,18 @@ public class HistoricoActivity extends AppCompatActivity {
         btnDataFinal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new DatePickerDialog(HistoricoActivity.this,dtpickerFimListener, anoFinal, mesFinal,diaFinal);
-                atualizaTextView();
+                DatePickerDialog dt = new DatePickerDialog(HistoricoActivity.this,dtpickerFimListener, anoFinal, mesFinal,diaFinal);
+                dt.show();
+
             }
         });
 
         btnDataInicial.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new DatePickerDialog(HistoricoActivity.this,dtpickerInicioListener, anoInicial,mesInicial,diaInicial);
-                atualizaTextView();
+                DatePickerDialog dt = new DatePickerDialog(HistoricoActivity.this,dtpickerInicioListener, anoInicial,mesInicial,diaInicial);
+                dt.show();
+
             }
         });
     }
@@ -127,6 +173,7 @@ public class HistoricoActivity extends AppCompatActivity {
             anoInicial = year;
             mesInicial = monthOfYear;
             diaInicial = dayOfMonth;
+            atualizaTextView();
         }
     };
 
@@ -137,6 +184,7 @@ public class HistoricoActivity extends AppCompatActivity {
             anoFinal = year;
             mesFinal = monthOfYear;
             diaFinal = dayOfMonth;
+            atualizaTextView();
         }
     };
 }
