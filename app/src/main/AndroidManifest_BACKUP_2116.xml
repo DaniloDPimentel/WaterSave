@@ -19,12 +19,14 @@
             </intent-filter>
         </activity>
         <activity android:name=".TipsActivity" />
-
+<<<<<<< HEAD
         <activity
             android:name=".DicasActivity"
             android:label="@string/title_activity_dicas"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+=======
         <activity android:name=".HistoricoActivity"></activity>
+>>>>>>> 0b2696ae455eee2fe256e415ab08dc1b1999fa46
     </application>
 
 </manifest>

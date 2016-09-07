@@ -19,11 +19,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".TipsActivity" />
-
-        <activity
-            android:name=".DicasActivity"
-            android:label="@string/title_activity_dicas"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".HistoricoActivity"></activity>
     </application>
 
