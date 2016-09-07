@@ -56,7 +56,7 @@ public class HistoricoActivity extends AppCompatActivity {
 
         carregarDados();
         gerarBarras();
-        
+
     }
 
     private void carregarDados(){
