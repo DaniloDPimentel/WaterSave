@@ -136,9 +136,12 @@ public class MainActivity extends AppCompatActivity
             Intent intent = new Intent(getApplicationContext(), DicasActivity.class);
             startActivity(intent);
 
-        } else if (id == R.id.nav_share) {
+        }else if(id == R.id.historicoDeConsumo){
+            Intent intent = new Intent(getApplicationContext(), HistoricoActivity.class);
+            startActivity(intent);
+        }else if (id == R.id.nav_share) {
 
-        } else if (id == R.id.nav_send) {
+        }else if (id == R.id.nav_send) {
 
         }
 

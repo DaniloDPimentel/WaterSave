@@ -11,8 +11,10 @@ public class Mock {
     public static final Mock Instance = new Mock();
 
     private List<Medicao> medicoes;
+    private int volumeCaixa;
 
     private Mock(){
+        volumeCaixa = 1000;
         medicoes = new ArrayList<Medicao>();
         Medicao medicao;
         Calendar c = Calendar.getInstance();
@@ -41,5 +43,9 @@ public class Mock {
 
     public void addMedicao(Medicao medicao){
         medicoes.add(medicao);
+    }
+
+    public int getVolumeCaixa(){
+        return volumeCaixa;
     }
 }
