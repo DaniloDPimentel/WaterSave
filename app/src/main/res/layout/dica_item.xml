@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="7dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.github.siyamed.shapeimageview.RoundedImageView
+                app:siRadius="2dp"
+                app:siBorderWidth="2dp"
+                app:siBorderColor="@color/cardview_dark_background"
+                android:layout_gravity="center"
+                android:id="@+id/img_Dica"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:src="@drawable/agua"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:textSize="15dp"
+                    android:layout_marginLeft="2dp"
+                    android:id="@+id/text_dica"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Il est dit que seule une population au cœur pur, et d
+                    ont l’âme ne porte pas traces de souillure karmique, peut vivre dans un Beyul.
+                     Et cette vallée est un Beyul! En tibétain, un pays, une vallée du Haut Himalaya protégée des tourme"/>
+            </LinearLayout>
+            
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

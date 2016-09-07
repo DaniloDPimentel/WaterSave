@@ -18,13 +18,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".TipsActivity" />
-
-        <activity
-            android:name=".DicasActivity"
-            android:label="@string/title_activity_dicas"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".HistoricoActivity"></activity>
+        <activity android:name=".TipsActivity"></activity>
     </application>
+
 
 </manifest>
