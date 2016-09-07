@@ -28,6 +28,7 @@ import java.util.TimerTask;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    //Testando
     @SuppressLint("SdCardPath")
     private CircleProgress circleProgress;
 
