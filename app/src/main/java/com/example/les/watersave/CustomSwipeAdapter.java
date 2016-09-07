@@ -7,22 +7,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-/**
- * Created by Danilo on 28/08/2016.
- */
 public class CustomSwipeAdapter extends PagerAdapter {
 
-    private int[] image_resources = {R.drawable.shower, R.drawable.rash};
-    private String[] image_tips = {"Banhos curtos","Menos descargas"};
     private Context ctx;
     private LayoutInflater layoutInflater;
+
+    private String[] image_tips = {"Banhos curtos", "Menos descargas"};
+    private int[] image_resources = {R.drawable.shower, R.drawable.rash};
 
     public CustomSwipeAdapter(Context ctx){
         this.ctx = ctx;
     }
+
     @Override
     public int getCount() {
         return image_resources.length;
@@ -40,10 +38,9 @@ public class CustomSwipeAdapter extends PagerAdapter {
         ImageView imageView = (ImageView) item_view.findViewById(R.id.image_view);
         TextView textView = (TextView) item_view.findViewById(R.id.image_count);
         imageView.setImageResource(image_resources[position]);
-        textView.setText("Dica : "+image_tips[position]);
+        textView.setText("Dica : " + image_tips[position]);
         container.addView(item_view);
         return item_view;
-
     }
 
     @Override

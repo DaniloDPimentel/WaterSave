@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -28,14 +27,14 @@ import java.util.TimerTask;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    //Testando
     @SuppressLint("SdCardPath")
     private CircleProgress circleProgress;
 
+    private TimerTask task;
     private EditText volumeCaixa;
     private Button salvarVolumeCaixa;
+
     private Timer timerAtual = new Timer();
-    private TimerTask task;
     private final Handler handler = new Handler();
 
     public MainActivity() {
@@ -118,7 +117,7 @@ public class MainActivity extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
+        // Noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
@@ -149,6 +148,4 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
-
 }

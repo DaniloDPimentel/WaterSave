@@ -1,6 +1,5 @@
 package com.example.les.watersave.adapters;
 
-import android.app.Activity;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -30,9 +29,8 @@ public class DicasRecyclerAdapter extends RecyclerView.Adapter<DicasRecyclerAdap
     public class ViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
 
-        //dados Dica 1
+        // Dados Dica
         public TextView txtNome;
-        public TextView txtNumEventos;
         public ImageView imgDica;
 
         public ViewHolder(View v) {
@@ -40,12 +38,8 @@ public class DicasRecyclerAdapter extends RecyclerView.Adapter<DicasRecyclerAdap
 
             txtNome = (TextView) v.findViewById(R.id.text_dica);
             imgDica = (ImageView) v.findViewById(R.id.img_Dica);
-
-
         }
     }
-
-
 
     // Create new views (invoked by the layout manager)
     @Override
@@ -58,9 +52,6 @@ public class DicasRecyclerAdapter extends RecyclerView.Adapter<DicasRecyclerAdap
     }
 
     // Replace the contents of a view (invoked by the layout manager)
-
-
-
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         // - get element from your dataset at this position
@@ -71,17 +62,12 @@ public class DicasRecyclerAdapter extends RecyclerView.Adapter<DicasRecyclerAdap
 
         try {
             holder.imgDica.setImageResource(dica.getImageResourse(context));
-        }catch (Exception e){
-
+        } catch (Exception e){
         }
-
-
     }
 
     @Override
     public int getItemCount() {
         return mDataset.size();
     }
-
-
 }

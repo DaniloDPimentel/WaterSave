@@ -10,8 +10,8 @@ import android.widget.TextView;
 
 import com.db.chart.model.BarSet;
 import com.db.chart.view.BarChartView;
-import com.example.les.watersave.Models.Medicao;
-import com.example.les.watersave.Models.Mock;
+import com.example.les.watersave.models.Medicao;
+import com.example.les.watersave.models.Mock;
 
 
 import java.text.DateFormat;
@@ -56,7 +56,7 @@ public class HistoricoActivity extends AppCompatActivity {
 
         carregarDados();
         gerarBarras();
-
+        
     }
 
     private void carregarDados(){
