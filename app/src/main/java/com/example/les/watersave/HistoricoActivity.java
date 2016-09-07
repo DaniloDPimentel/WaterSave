@@ -6,8 +6,8 @@ import android.util.Log;
 
 import com.db.chart.model.BarSet;
 import com.db.chart.view.BarChartView;
-import com.example.les.watersave.Models.Medicao;
-import com.example.les.watersave.Models.Mock;
+import com.example.les.watersave.models.Medicao;
+import com.example.les.watersave.models.Mock;
 
 import java.util.List;
 
@@ -25,7 +25,7 @@ public class HistoricoActivity extends AppCompatActivity {
         historico = (BarChartView) findViewById(R.id.graph_historico);
         barrasHistorico = new BarSet();
         carregarDados();
-        Log.d("Teste","nivel: "+dados.get(0).getNivel());
+        Log.d("Teste", "nivel: " + dados.get(0).getNivel());
     }
 
     private void carregarDados(){

@@ -20,6 +20,7 @@ public class CustomSwipeAdapter extends PagerAdapter {
     public CustomSwipeAdapter(Context ctx){
         this.ctx = ctx;
     }
+
     @Override
     public int getCount() {
         return image_resources.length;

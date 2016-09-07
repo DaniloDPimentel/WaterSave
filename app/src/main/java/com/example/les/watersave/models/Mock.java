@@ -1,29 +1,24 @@
-package com.example.les.watersave.Models;
+package com.example.les.watersave.models;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-/**
- * Created by Renato on 07/09/2016.
- */
 public class Mock {
+
     public static final Mock Instance = new Mock();
+    private List<Medicao> medicoes = new ArrayList<>();
 
-    private List<Medicao> medicoes;
-
-    private Mock(){
-        medicoes = new ArrayList<Medicao>();
-        Medicao medicao;
-        Calendar c = Calendar.getInstance();
+    private Mock() {
         int j = 20;
+        Calendar c = Calendar.getInstance();
         for(int i = 0; i < 100; i++){
-            medicao = new Medicao(j,c.getTime());
-            if(i%3 == 0) {
+            Medicao medicao = new Medicao(j,c.getTime());
+            if(i % 3 == 0) {
                 c.add(Calendar.DATE, -1);
                 c.add(Calendar.HOUR,4);
                 j--;
-            } else{
+            } else {
                 c.add(Calendar.HOUR, -2);
                 j++;
             }

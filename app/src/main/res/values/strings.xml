@@ -6,4 +6,27 @@
 
     <string name="action_settings">Settings</string>
     <string name="title_activity_dicas">DicasActivity</string>
+    <string name="dica_banho">banho</string>
+    <string name="dica_banho_desc">
+        Tome banhos mais rápidos.
+        Cada minuto a menos no chuveiro pode evitar o desperdício de 23 litros de água,
+        dependendo do chuveiro.
+    </string>
+    <string name="dica_torneira">torneira</string>
+    <string name="dica_torneira_desc">
+        Se você tem uma torneira pingando,
+        conserte‑a logo – o desperdício de água pode chegar a 2.000 litros por mês.
+        Não tente apertar mais a torneira, pois isto desgastará a arruela e agravará o vazamento.
+    </string>
+    <string name="dica_louca">louca</string>
+    <string name="dica_louca_desc">
+        Ao lavar a louça manualmente,
+        enxágue os pratos na pia cheia de água em vez de sob a torneira.
+        Você pode economizar até 15 litros por minuto.
+    </string>
+    <string name="dica_carro">carro</string>
+    <string name="dica_carro_desc">
+        Ao lavar o carro, use balde e esponja no lugar da mangueira.
+        Se utilizar apenas seis baldes, a economia chegará a 150 litros por lavagem.
+    </string>
 </resources>
