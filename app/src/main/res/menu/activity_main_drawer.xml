@@ -6,6 +6,10 @@
             android:id="@+id/nav_camera"
             android:icon="@drawable/ic_menu_camera"
             android:title="Dicas" />
+        <item
+            android:id="@+id/historicoDeConsumo"
+            android:icon="@mipmap/ic_graph"
+            android:title="Histórico de consumo" />
 
     </group>
 
