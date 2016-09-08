@@ -96,11 +96,15 @@ public class HistoricoActivity extends AppCompatActivity {
         Calendar c2 = Calendar.getInstance();
 
         for(int i = 0; i < dados.size()-1; i++){
+            c1.setTime(dados.get(i).getData());
+            c2.setTime(dados.get(i+1).getData());
 
-            if(dados.get(i).getData().before(dataInicial.getTime())){
-                break;
+            if(c1.get(Calendar.DAY_OF_YEAR) < dataInicial.get(Calendar.DAY_OF_YEAR) &&
+                    c1.get(Calendar.YEAR) == dataInicial.get(Calendar.YEAR)){
+                continue;
             }
-            if(dados.get(i).getData().after(dataFinal.getTime())){
+            if(c1.get(Calendar.DAY_OF_YEAR) > dataFinal.get(Calendar.DAY_OF_YEAR) &&
+                    c1.get(Calendar.YEAR) == dataFinal.get(Calendar.YEAR)){
                 continue;
             }
 
