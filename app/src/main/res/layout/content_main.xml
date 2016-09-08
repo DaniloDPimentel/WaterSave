@@ -30,7 +30,7 @@
         android:textSize="40dp"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Minha Caixa"
-        android:id="@+id/textView"
+        android:id="@+id/textView3"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
         android:autoText="true" />
@@ -39,11 +39,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Cadastrar volume da Caixa D&apos;agua"
+        android:id="@+id/textView1" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
         android:id="@+id/textView2"
+        android:layout_below="@+id/textView1" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Cadastrar volume da Caixa D&apos;agua"
+        android:id="@+id/textView4"
         android:layout_alignParentStart="true"
-        android:layout_above="@+id/editText"
-        android:layout_alignParentLeft="true" />
+        android:layout_above="@+id/editText" />
 
     <Button
         android:layout_width="wrap_content"

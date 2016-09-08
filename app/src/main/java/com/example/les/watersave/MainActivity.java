@@ -16,8 +16,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.les.watersave.models.Mock;
 import com.github.lzyzsd.circleprogress.CircleProgress;
 
 import java.util.Timer;
@@ -50,6 +52,21 @@ public class MainActivity extends AppCompatActivity
 
         volumeCaixa = (EditText) findViewById(R.id.editText);
         salvarVolumeCaixa = (Button) findViewById(R.id.button);
+
+        TextView consumoText = (TextView) findViewById(R.id.textView1);
+        TextView estivativaText = (TextView) findViewById(R.id.textView2);
+
+        String consumo = String.format(
+                getResources().getString(R.string.consumo_text),
+                Mock.Instance.getMediaConsumoDiaria()
+        );
+        consumoText.setText(consumo);
+
+        String estimativa = String.format(
+                getResources().getString(R.string.estimativa_text),
+                Mock.Instance.getEstimativa()
+        );
+        estivativaText.setText(estimativa);
 
         salvarVolumeCaixa.setOnClickListener(new Button.OnClickListener() {
                                                  public void onClick(View v) {
@@ -93,7 +110,7 @@ public class MainActivity extends AppCompatActivity
         timerAtual.schedule(task, 300, 300);
     }
 
-        @Override
+    @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
@@ -121,12 +138,11 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
+    @SuppressWarnings("StatementWithEmptyBody")
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
