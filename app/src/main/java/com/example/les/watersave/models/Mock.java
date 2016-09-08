@@ -1,5 +1,7 @@
 package com.example.les.watersave.models;
 
+import android.util.Log;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -80,6 +82,6 @@ public class Mock {
         int currDay = date.get(Calendar.DAY_OF_MONTH);
         int lastDay = date.getActualMaximum(Calendar.DAY_OF_MONTH);
 
-        return CAIXA_CAP - ((lastDay - currDay) * meanDay) / meanDay;
+        return (CAIXA_CAP - (lastDay - currDay) * meanDay) / meanDay;
     }
 }
