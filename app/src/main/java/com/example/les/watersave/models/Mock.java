@@ -41,7 +41,7 @@ public class Mock {
         medicoes.add(medicao);
     }
 
-    public double getConsumo() {
+    private double getConsumo() {
         Calendar date = Calendar.getInstance();
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
@@ -56,7 +56,7 @@ public class Mock {
 
         for (Medicao medicao: tempMedicoes) {
             if (dateFormat.format(medicao.getData()).compareTo(startDate) >= 0) {
-                double medicaoLevel = CAIXA_CAP / medicao.getNivel();
+                double medicaoLevel = CAIXA_CAP * medicao.getNivel() / 100;
                 if (medicaoLevel > refLevel)
                         consumo += medicaoLevel - refLevel;
 
@@ -72,12 +72,7 @@ public class Mock {
     }
 
     public double getEstimativa() {
-        Calendar date = Calendar.getInstance();
-
-        double meanDay = getMediaConsumoDiaria();
-        int currDay = date.get(Calendar.DAY_OF_MONTH);
-        int lastDay = date.getActualMaximum(Calendar.DAY_OF_MONTH);
-
-        return (CAIXA_CAP - (lastDay - currDay) * meanDay) / meanDay;
+        double currLevel = CAIXA_CAP * medicoes.get(0).getNivel() / 100;
+        return currLevel / getMediaConsumoDiaria();
     }
 }
