@@ -79,7 +79,7 @@ public class HistoricoActivity extends AppCompatActivity {
 
     private void carregarDados(){
         dados = Mock.Instance.getMedicoes();
-        volumeCaixa = Mock.Instance.getVolumeCaixa();
+        volumeCaixa = 1000;
     }
 
     private int comparar(String data1, String data2){
