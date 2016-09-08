@@ -20,6 +20,7 @@ import com.example.les.watersave.models.Mock;
 import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.List;
+import java.util.StringTokenizer;
 
 public class HistoricoActivity extends AppCompatActivity {
     private static final int dialogIdStart = 0, dialogIdEnd = 1;
@@ -81,15 +82,37 @@ public class HistoricoActivity extends AppCompatActivity {
         volumeCaixa = Mock.Instance.getVolumeCaixa();
     }
 
+    private int comparar(String data1, String data2){
+        if(data1.substring(6,10).compareTo(data2.substring(6,10)) < 0){
+            return -1;
+        }
+        if(data1.substring(6,10).compareTo(data2.substring(6,10)) > 0){
+            return 1;
+        }
+        if(data1.substring(3,5).compareTo(data2.substring(3,5)) < 0){
+            return -1;
+        }
+        if(data1.substring(3,5).compareTo(data2.substring(3,5)) > 0){
+            return 1;
+        }
+        if(data1.substring(0,2).compareTo(data2.substring(0,2)) < 0){
+            return -1;
+        }
+        if(data1.substring(0,2).compareTo(data2.substring(0,2)) > 0){
+            return -1;
+        }
+        return 0;
+    }
+
     private void gerarBarras(){
         barrasHistorico = new BarSet();
         float consumo = 0, consumoDiario = 0;
         maxConsumo = 0;
         for(int i = 0; i < dados.size()-1; i++){
-            if(dados.get(i).getData().compareTo(dataInicial.getTime()) < 0){
+            if(comparar(formataData.format(dados.get(i).getData()),formataData.format(dataInicial.getTime())) < 0){
                 continue;
             }
-            if(dados.get(i).getData().compareTo(dataFinal.getTime()) > 0){
+            if(comparar(formataData.format(dados.get(i).getData()),formataData.format(dataFinal.getTime())) > 0){
                 continue;
             }
 
