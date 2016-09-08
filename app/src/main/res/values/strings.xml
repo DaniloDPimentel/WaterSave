@@ -29,4 +29,6 @@
         Ao lavar o carro, use balde e esponja no lugar da mangueira.
         Se utilizar apenas seis baldes, a economia chegará a 150 litros por lavagem.
     </string>
+    <string name="consumo_text">Consumo Diário: %1$.2f litros</string>
+    <string name="estimativa_text">Estimativa de água na caixa: %1$.1f dias</string>
 </resources>

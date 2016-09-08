@@ -2,7 +2,7 @@ package com.example.les.watersave.models;
 
 import java.util.Date;
 
-public class Medicao {
+public class Medicao implements Comparable<Medicao> {
 
     private Long id;
 
@@ -14,11 +14,16 @@ public class Medicao {
         this.data = data;
     }
 
-    public int getNivel(){
+    public int getNivel() {
         return nivel;
     }
 
-    public Date getData(){
+    public Date getData() {
         return data;
+    }
+
+    @Override
+    public int compareTo(Medicao another) {
+        return data.compareTo(another.data);
     }
 }
