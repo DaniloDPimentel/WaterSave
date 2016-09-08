@@ -21,10 +21,8 @@ public class Mock {
             Medicao medicao = new Medicao(j,c.getTime());
             if(i % 3 == 0) {
                 c.add(Calendar.DATE, -1);
-                c.add(Calendar.HOUR, 4);
                 j--;
             } else {
-                c.add(Calendar.HOUR, -2);
                 j++;
             }
             medicoes.add(medicao);

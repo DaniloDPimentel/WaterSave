@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.db.chart.model.Bar;
 import com.db.chart.model.BarSet;
@@ -73,8 +74,12 @@ public class HistoricoActivity extends AppCompatActivity {
 
         historico.setAxisBorderValues(0, maxInterval, interval);
         historico.setGrid(ChartView.GridType.HORIZONTAL, DIVISOES_Y, 1, paint);
-        historico.addData(barrasHistorico);
-        historico.show();
+
+        if(barrasHistorico.size() != 0) {
+            historico.addData(barrasHistorico);
+            historico.show();
+        }else{
+        }
     }
 
     private void carregarDados(){
@@ -82,42 +87,27 @@ public class HistoricoActivity extends AppCompatActivity {
         volumeCaixa = 1000;
     }
 
-    private int comparar(String data1, String data2){
-        if(data1.substring(6,10).compareTo(data2.substring(6,10)) < 0){
-            return -1;
-        }
-        if(data1.substring(6,10).compareTo(data2.substring(6,10)) > 0){
-            return 1;
-        }
-        if(data1.substring(3,5).compareTo(data2.substring(3,5)) < 0){
-            return -1;
-        }
-        if(data1.substring(3,5).compareTo(data2.substring(3,5)) > 0){
-            return 1;
-        }
-        if(data1.substring(0,2).compareTo(data2.substring(0,2)) < 0){
-            return -1;
-        }
-        if(data1.substring(0,2).compareTo(data2.substring(0,2)) > 0){
-            return -1;
-        }
-        return 0;
-    }
-
     private void gerarBarras(){
         barrasHistorico = new BarSet();
         float consumo = 0, consumoDiario = 0;
         maxConsumo = 0;
+        Calendar c1 = Calendar.getInstance();
+        Calendar c2 = Calendar.getInstance();
+
         for(int i = 0; i < dados.size()-1; i++){
-            if(comparar(formataData.format(dados.get(i).getData()),formataData.format(dataInicial.getTime())) < 0){
+            c1.setTime(dados.get(i).getData());
+            c2.setTime(dados.get(i+1).getData());
+            if(c1.get(Calendar.DAY_OF_YEAR) == dataInicial.get(Calendar.DAY_OF_YEAR) &&
+                    c1.get(Calendar.YEAR) == dataInicial.get(Calendar.YEAR)){
                 continue;
             }
-            if(comparar(formataData.format(dados.get(i).getData()),formataData.format(dataFinal.getTime())) > 0){
+            if(c1.get(Calendar.DAY_OF_YEAR) == dataFinal.get(Calendar.DAY_OF_YEAR) &&
+                    c1.get(Calendar.YEAR) == dataFinal.get(Calendar.YEAR)){
                 continue;
             }
 
-            if(formataData.format(dados.get(i).getData()).compareTo(
-                    formataData.format(dados.get(i+1).getData())) == 0){
+            if(c1.get(Calendar.DAY_OF_YEAR) == c2.get(Calendar.DAY_OF_YEAR) &&
+                    c1.get(Calendar.YEAR) == c2.get(Calendar.YEAR)){
                 consumo = dados.get(i+1).getNivel() - dados.get(i).getNivel();
                 if(consumo >= 0){
                     consumo = consumo*volumeCaixa/100f;
@@ -160,10 +150,6 @@ public class HistoricoActivity extends AppCompatActivity {
         dataFinal.set(Calendar.YEAR,anoFinal);
         dataFinal.set(Calendar.MONTH,mesFinal);
         dataFinal.set(Calendar.DAY_OF_MONTH,diaFinal);
-
-        carregarDados();
-        gerarBarras();
-        setarGrafico();
     }
 
     private void showDateDialogOnClick(){
@@ -193,10 +179,24 @@ public class HistoricoActivity extends AppCompatActivity {
             = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+            if (year > anoFinal){
+                Toast.makeText(getApplicationContext(),"Data inicial maior que a final!",Toast.LENGTH_LONG).show();
+                return;
+            }
+            if(monthOfYear > mesFinal){
+                Toast.makeText(getApplicationContext(),"Data inicial maior que a final!",Toast.LENGTH_LONG).show();
+                return;
+            }
+            if(dayOfMonth > diaFinal){
+                Toast.makeText(getApplicationContext(),"Data inicial maior que a final!",Toast.LENGTH_LONG).show();
+                return;
+            }
             anoInicial = year;
             mesInicial = monthOfYear;
             diaInicial = dayOfMonth;
             atualizaTextView();
+            gerarBarras();
+            setarGrafico();
         }
     };
 
@@ -204,10 +204,24 @@ public class HistoricoActivity extends AppCompatActivity {
             = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+            if (year < anoInicial){
+                Toast.makeText(getApplicationContext(),"Data final menor que a inicial!",Toast.LENGTH_LONG).show();
+                return;
+            }
+            if(monthOfYear < mesInicial){
+                Toast.makeText(getApplicationContext(),"Data final menor que a inicial!",Toast.LENGTH_LONG).show();
+                return;
+            }
+            if(dayOfMonth < diaInicial){
+                Toast.makeText(getApplicationContext(),"Data final menor que a inicial!",Toast.LENGTH_LONG).show();
+                return;
+            }
             anoFinal = year;
             mesFinal = monthOfYear;
             diaFinal = dayOfMonth;
             atualizaTextView();
+            gerarBarras();
+            setarGrafico();
         }
     };
 }
