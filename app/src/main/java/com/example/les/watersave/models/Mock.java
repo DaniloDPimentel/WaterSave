@@ -55,7 +55,7 @@ public class Mock {
         Collections.sort(tempMedicoes);
 
         for (Medicao medicao: tempMedicoes) {
-            if (dateFormat.format(medicao.getData()).compareTo(startDate) >= 0) {
+            if (dateFormat.format(medicao.getData_da_medicao()).compareTo(startDate) >= 0) {
                 double medicaoLevel = CAIXA_CAP * medicao.getNivel() / 100;
                 if (medicaoLevel > refLevel)
                         consumo += medicaoLevel - refLevel;

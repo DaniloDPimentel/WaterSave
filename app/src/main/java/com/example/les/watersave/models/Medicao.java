@@ -4,26 +4,26 @@ import java.util.Date;
 
 public class Medicao implements Comparable<Medicao> {
 
-    private Long id;
+    private Long chipid;
 
     private int nivel;
-    private Date data;
+    private Date data_da_medicao;
 
     public Medicao(int nivel,Date data) {
         this.nivel = nivel;
-        this.data = data;
+        this.data_da_medicao = data;
     }
 
     public int getNivel() {
         return nivel;
     }
 
-    public Date getData() {
-        return data;
+    public Date getData_da_medicao() {
+        return data_da_medicao;
     }
 
     @Override
     public int compareTo(Medicao another) {
-        return data.compareTo(another.data);
+        return data_da_medicao.compareTo(another.data_da_medicao);
     }
 }

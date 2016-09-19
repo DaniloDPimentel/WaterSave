@@ -14,8 +14,7 @@ import java.util.List;
 
 public class DicasActivity extends AppCompatActivity {
 
-    private List<Dica> itens;
-    private RecyclerView listDicas;
+    private List<Dica> dicas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,38 +23,38 @@ public class DicasActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         popularItem();
-        initializeRecyclerView(itens);
+        initializeRecyclerView(dicas);
     }
 
-    void initializeRecyclerView(List<Dica> list) {
-        listDicas = (RecyclerView) findViewById(R.id.dicas_list);
-        listDicas.setAdapter(new DicasRecyclerAdapter(getApplicationContext(),list));
+    void initializeRecyclerView(List<Dica> dicas) {
+        RecyclerView listDicas = (RecyclerView) findViewById(R.id.dicas_list);
+
+        listDicas.setAdapter(new DicasRecyclerAdapter(getApplicationContext(), dicas));
         listDicas.setLayoutManager(new LinearLayoutManager(this));
         listDicas.setHasFixedSize(true);
         listDicas.setNestedScrollingEnabled(false);
     }
 
     public void popularItem(){
-        itens = new ArrayList<>();
+        dicas = new ArrayList<>();
 
-        if(itens.size() == 0) {
-            itens.add(new Dica(
+        if(dicas.size() == 0) {
+            dicas.add(new Dica(
                     getResources().getString(R.string.dica_banho),
                     getResources().getString(R.string.dica_banho_desc)
             ));
-            itens.add(new Dica(
+            dicas.add(new Dica(
                     getResources().getString(R.string.dica_louca),
                     getResources().getString(R.string.dica_louca_desc)
             ));
-            itens.add(new Dica(
+            dicas.add(new Dica(
                     getResources().getString(R.string.dica_carro),
                     getResources().getString(R.string.dica_carro_desc)
             ));
-            itens.add(new Dica(
+            dicas.add(new Dica(
                     getResources().getString(R.string.dica_torneira),
                     getResources().getString(R.string.dica_torneira_desc)
             ));
         }
     }
-
 }

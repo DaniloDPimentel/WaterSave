@@ -31,4 +31,10 @@
     </string>
     <string name="consumo_text">Consumo Diário: %1$.2f litros</string>
     <string name="estimativa_text">Estimativa de água na caixa: %1$.0f dias</string>
+
+    <string name="medicao_tag">tagMedicao</string>
+    <string name="get_medicoes">http://marcosarruda.me/povmt/esp12/%1$s</string>
+
+    <string name="data_final_error">Data final menor que a inicial!</string>
+    <string name="data_inicial_error">Data inicial maior que a final!</string>
 </resources>
