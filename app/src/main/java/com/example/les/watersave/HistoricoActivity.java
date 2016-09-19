@@ -137,7 +137,7 @@ public class HistoricoActivity extends AppCompatActivity {
         if(firstMonth >= 10) {
             zero2 = "";
         }
-        txViewFirstDate.setText(zero1 + firstDay + "/" + zero2 + (firstMonth + 1) + "/" + firstYear);
+        txViewFirstDate.setText(String.format(getString(R.string.data_format), zero1 + firstDay, zero2 + (firstMonth + 1), firstYear));
 
         zero1 = "0";
         zero2 = "0";
@@ -146,7 +146,7 @@ public class HistoricoActivity extends AppCompatActivity {
         if(lastMonth >= 10)
             zero2 = "";
 
-        txViewLastDate.setText(zero1 + lastDay + "/" + zero2 + (lastMonth +1) + "/" + lastYear);
+        txViewLastDate.setText(String.format(getString(R.string.data_format), zero1 + lastDay, zero2 + (lastMonth + 1), lastYear));
 
         firstDate.set(Calendar.YEAR, firstYear);
         firstDate.set(Calendar.MONTH, firstMonth);
@@ -158,27 +158,27 @@ public class HistoricoActivity extends AppCompatActivity {
     }
 
     private void showDateDialogOnClick() {
-        Button btnDataFinal = (Button) findViewById(R.id.btn_data_fim);
-        Button btnDataInicial = (Button) findViewById(R.id.btn_data_inicio);
+        Button btnLastDate = (Button) findViewById(R.id.btn_data_fim);
+        Button btnFirstDate = (Button) findViewById(R.id.btn_data_inicio);
 
-        btnDataFinal.setOnClickListener(new View.OnClickListener() {
+        btnLastDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatePickerDialog dt = new DatePickerDialog(HistoricoActivity.this,dtpickerFimListener, lastYear, lastMonth, lastDay);
+                DatePickerDialog dt = new DatePickerDialog(HistoricoActivity.this, dtpickerLastListener, lastYear, lastMonth, lastDay);
                 dt.show();
             }
         });
 
-        btnDataInicial.setOnClickListener(new View.OnClickListener() {
+        btnFirstDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatePickerDialog dt = new DatePickerDialog(HistoricoActivity.this,dtpickerInicioListener, firstYear, firstMonth, firstDay);
+                DatePickerDialog dt = new DatePickerDialog(HistoricoActivity.this, dtpickerFirstListener, firstYear, firstMonth, firstDay);
                 dt.show();
             }
         });
     }
 
-    private DatePickerDialog.OnDateSetListener dtpickerInicioListener
+    private DatePickerDialog.OnDateSetListener dtpickerFirstListener
             = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
@@ -205,7 +205,7 @@ public class HistoricoActivity extends AppCompatActivity {
         }
     };
 
-    private DatePickerDialog.OnDateSetListener dtpickerFimListener
+    private DatePickerDialog.OnDateSetListener dtpickerLastListener
             = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {

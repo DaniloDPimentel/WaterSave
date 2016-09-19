@@ -35,6 +35,7 @@
     <string name="medicao_tag">tagMedicao</string>
     <string name="get_medicoes">http://marcosarruda.me/povmt/esp12/%1$s</string>
 
+    <string name="data_format">%1$s/%2$s/%3$s</string>
     <string name="data_final_error">Data final menor que a inicial!</string>
     <string name="data_inicial_error">Data inicial maior que a final!</string>
 </resources>

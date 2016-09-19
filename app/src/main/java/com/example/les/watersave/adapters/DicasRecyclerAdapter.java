@@ -43,8 +43,7 @@ public class DicasRecyclerAdapter extends RecyclerView.Adapter<DicasRecyclerAdap
 
     // Create new views (invoked by the layout manager)
     @Override
-    public DicasRecyclerAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
-                                                                   int viewType) {
+    public DicasRecyclerAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // create a new view
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.dica_item, parent, false);
         // set the view's size, margins, paddings and layout parameters

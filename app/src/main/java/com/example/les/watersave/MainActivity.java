@@ -32,9 +32,7 @@ public class MainActivity extends AppCompatActivity
     @SuppressLint("SdCardPath")
     private CircleProgress circleProgress;
 
-    private TimerTask task;
     private EditText volumeCaixa;
-    private Button salvarVolumeCaixa;
 
     private Timer timerAtual = new Timer();
     private final Handler handler = new Handler();
@@ -51,7 +49,7 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         volumeCaixa = (EditText) findViewById(R.id.editText);
-        salvarVolumeCaixa = (Button) findViewById(R.id.button);
+        Button salvarVolumeCaixa = (Button) findViewById(R.id.button);
 
         TextView consumoText = (TextView) findViewById(R.id.textView1);
         TextView estivativaText = (TextView) findViewById(R.id.textView2);
@@ -68,18 +66,18 @@ public class MainActivity extends AppCompatActivity
         );
         estivativaText.setText(estimativa);
 
-        salvarVolumeCaixa.setOnClickListener(new Button.OnClickListener() {
-                                                 public void onClick(View v) {
+        salvarVolumeCaixa.setOnClickListener(
+                new Button.OnClickListener() {
+                    public void onClick(View v) {
+                        Context contexto = getApplicationContext();
+                        String texto = "Caixa salva com: " + volumeCaixa.getText() + " L";
+                        int duracao = Toast.LENGTH_SHORT;
 
-                                                     Context contexto = getApplicationContext();
-                                                     String texto = "Caixa salva com: " + volumeCaixa.getText() + " L";
-                                                     int duracao = Toast.LENGTH_SHORT;
+                        Toast toast = Toast.makeText(contexto, texto, duracao);
+                        toast.show();
 
-                                                     Toast toast = Toast.makeText(contexto, texto, duracao);
-                                                     toast.show();
-
-                                                 }
-                                             }
+                    }
+                }
         );
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -97,7 +95,7 @@ public class MainActivity extends AppCompatActivity
 
     int i = 4;
     private void ativaTimer(){
-        task = new TimerTask() {
+        TimerTask task = new TimerTask() {
             public void run() {
                 handler.post(new Runnable() {
                     public void run() {
@@ -151,15 +149,10 @@ public class MainActivity extends AppCompatActivity
             Intent intent = new Intent(getApplicationContext(), DicasActivity.class);
             startActivity(intent);
 
-        }else if(id == R.id.historicoDeConsumo){
+        }else if(id == R.id.historicoDeConsumo) {
             Intent intent = new Intent(getApplicationContext(), HistoricoActivity.class);
             startActivity(intent);
-        }else if (id == R.id.nav_share) {
-
-        }else if (id == R.id.nav_send) {
-
         }
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
